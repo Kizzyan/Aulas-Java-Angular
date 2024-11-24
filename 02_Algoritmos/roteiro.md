@@ -55,7 +55,7 @@
     - É totalmente natural que vocês tenha certa dificuldade e talvez se frustem um pouco tentando realizá-los
     - Então não tenham receio de olhar a resolução de algum exercícios que vocês estiverem travados
     - Estudem com calma a resolução, copiem o código e tentem entender exatamente o que está sendo feito
-    - E lembrem de pesquisar me consultar ou até mesmo pesquisar no google caso algum ponto não esteja claro
+    - E lembrem de me consultar ou pesquisar no google caso algum ponto não esteja claro
 
 ## Referências
 - Para essa aula, foram utilizados os capítulos 1 a 4 do livro **Entendendo Algoritmos**, de *Aditya Y. Bhargava* 
