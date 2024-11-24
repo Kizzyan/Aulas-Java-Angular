@@ -16,8 +16,8 @@ class OrdenancaoPorSelecao {
   // Dependendo da linguagem, essa função já pode estar pré-implementada
   static int encontrarMenor(ArrayList<Integer> lista) {
     // Declaramos o menor valor e o seu índice, assumindo inicialmente o primeiro elemento
-    Integer menor = lista.getFirst();
-    int menorIndice = 0;
+    Integer menor = lista.getFirst(); // Dependendo da versão do java, pode ser necessário substituir getFirst por get(0)
+   int menorIndice = 0;
     // Percorremos a lista
     for (int i = 0; i < lista.size(); i++) {
       // Checamos se o elemento atual é menor do que menor valor que definimos inicialmente

@@ -47,5 +47,15 @@
         - [Dicas para Devs Java](https://www.youtube.com/watch?v=DyIRDIgwxIw)
         - [Construindo um portfólio de aprendizagem](https://www.youtube.com/watch?v=PYKfy4DcqOI)
 
+## Exercícios
+- A primeiro momento, recomendo fazerem todos os exercícios dos capítulos 1 a 4 do livro Entendendo Algoritmos. São exercícios curtos e simples apenas para fixação do conteúdo
+- Para aqueles que sabem inglês, também recomendo o site [Exercism](https://exercism.org/). Ele possui uma vasta coleção de exercícios com diferentes graus de dificuldade, além de explicar bem sobre conceitos bases de Java
+- Para os que querem ir ainda mais fundo, recomendo os exercícios da plataforma [CodeWars](https://www.codewars.com/kata) ou [LeetCode](https://leetcode.com)
+    - **Atenção:** Os exercícios dessas plataformas (até os mais fáceis) tendem a ter um nível um pouco mais avançado
+    - É totalmente natural que vocês tenha certa dificuldade e talvez se frustem um pouco tentando realizá-los
+    - Então não tenham receio de olhar a resolução de algum exercícios que vocês estiverem travados
+    - Estudem com calma a resolução, copiem o código e tentem entender exatamente o que está sendo feito
+    - E lembrem de pesquisar me consultar ou até mesmo pesquisar no google caso algum ponto não esteja claro
+
 ## Referências
 - Para essa aula, foram utilizados os capítulos 1 a 4 do livro **Entendendo Algoritmos**, de *Aditya Y. Bhargava* 

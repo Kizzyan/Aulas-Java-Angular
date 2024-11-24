@@ -19,7 +19,7 @@ class Mergesort {
         // Percorremos as sublistas enquanto um delas não for vazia
         while (!esquerda.isEmpty() && !direita.isEmpty()) {
             // Caso o primeiro elemento da esquerda seja menor que o da direita, adicionamos ele aos resultados
-            if (esquerda.getFirst() < direita.getFirst()) resultado.add(esquerda.removeFirst());
+            if (esquerda.getFirst() < direita.getFirst()) resultado.add(esquerda.removeFirst()); // Dependendo da versão do Java, pode ser necessário substituir getFirst e removeFirst por get(0) ou remove(0)
             // Do contrário, adicionamos o primeiro elemento da direita aos resultados
             else resultado.add(direita.removeFirst());
         }
