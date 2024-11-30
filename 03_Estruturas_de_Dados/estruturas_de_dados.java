@@ -31,25 +31,33 @@ class EstruturasDeDados {
     //========== Matrizes ==========
     int[][] matriz1 = { { 1, 2, 3 }, { 4, 5, 6 } }; // Matriz bidimensional
     int[][] matriz2 = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } }; // Matriz tridimensional
-    Integer[][] matriz3 = new Integer[5][5]; // Matriz vazia com um máximo de 5 linhas e 5 colunas
-    String[][][] matriz4 = new String[5][5][5]; // Matriz vazia com um máximo de 5 espaços em cada direção
+    Integer[][] matriz3 = new Integer[5][5]; // Matriz bidimensional vazia com um máximo de 5 linhas e 5 colunas
+    String[][][] matriz4 = new String[5][5][5]; // Matriz tridimensional vazia com um máximo de 5 espaços em cada direção
     //====================
 
     //========== Grafos ==========
-    // Grafos não tem representação nativa em Java, mas podem ser representados utilizando mapas ou arrays
+    // Grafos não tem implementação nativa em Java, mas podem ser representados utilizando mapas ou arrays
     HashMap<String, String> grafo1 = new HashMap<>();
     String[][] grafo2 = { { "a", "b" },
                           { "a", "c" },
                           { "b", "d" },
                           { "b", "c" },
-                          { "c", "d" },};
+                          { "c", "d" }};
     //====================
 
     //========== Árvores ==========
+    TreeMap<String, String> arvore1 = new TreeMap<>(); // Árvore utilizando a abordagem de mapa
+    TreeSet<String> arvore2 = new TreeSet<>(); // Árvore utilizando a abordagem de sets
+    //====================
 
-    TreeMap<String, String> arvore1 = new TreeMap<>();
-    TreeSet<String> arvore2 = new TreeSet<>();
-
+    //========== Árvores ==========
+    HashMap<String, String> mapa1 = new HashMap<>(); // Mapa Hash
+    Hashtable<String, String> tabela1 = new Hashtable<>(); // Tabela Hash
+    // Tabelas e Mapas hash tem comportamento semelhantes, mas algumas diferenças chave:
+    // 1. Hashtables são mais otimizadas para aplicações que fazem uso de threads
+    // 2. Hashtable não aceitam chaves ou valores nulos
+    // 3. Hashmaps possuem uma subclasse (LinkedHashMap) que armazena os elementos em ordem de inserção
+    HashSet<String> conjunto1 = new HashSet<>(); // Conjunto Hash
     //====================
   }
 }

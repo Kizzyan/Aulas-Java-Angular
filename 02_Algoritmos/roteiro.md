@@ -22,7 +22,7 @@
 - Sendo assim, fiquem a vontade para tirar **qualquer** dúvida comigo sobre esses códigos, seja no grupo ou no privado
 
 ## Links Úteis
-- [Anotações da Aula](https://excalidraw.com/#json=ZQpXlPr1H8DRhZqrC-2gl,aMLn57RCASHmtVMHbTxozQ)
+- [Anotações da Aula](https://excalidraw.com/#json=Ffm4H8efI2T24UqFCFBtm,XnD6X8Mo9E15V_66swhaww)
 - [Vídeo 1](https://www.youtube.com/watch?v=kPRA0W1kECg)
     - Esse vídeo mostra 15 exemplos de algoritmos de ordenação de uma forma visual e sonora em 5 minutos
     - Recomendo que prestem atenção nos algoritmos discutidos em aula que aparecem nesse vídeo, pois visualizar o código sendo aplicado vai contribuir bastante para seu aprendizado
