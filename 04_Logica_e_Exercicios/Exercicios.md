@@ -72,6 +72,7 @@ public class Calculadora {
   - **Ladino:** D20 para Destreza, D12 para Forca e D8 para Inteligência
   - **Mago:** D20 para Inteligência, D12 para Destreza e D8 para Força
   - **Guerreiro:** D20 para Força, D12 para Destreza e D8 para Inteligência
+- D20 significa um número aleatório entre 1 e 20, enquanto D12 entre 1 e 12 e D8 entre 1 e 8
 - Depois de criado, o personagem deve possuir um método "mostrarFicha" que imprime na tela todas as informações do personagem
 - **Dica:** Você precisa criar uma nova classe `Personagem` contendo todos os atributos necessários e instanciá-la cada vez que precisar gerar um novo personagem
 - **Código base:**
