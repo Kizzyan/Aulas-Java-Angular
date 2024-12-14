@@ -13,7 +13,7 @@
 - Também incentivo vocês a pesquisarem as estruturas apresentadas por conta própria para um maior aprofundamento no assunto
 
 ## Links Úteis
-- [Anotações da Aula](https://excalidraw.com/#json=Ffm4H8efI2T24UqFCFBtm,XnD6X8Mo9E15V_66swhaww)
+- [Anotações da Aula](https://excalidraw.com/#json=DgKZY8zTx45tbkwcTwjsL,AEJ1Wg-wGa8ah5dEJ7wg_w)
 - [Vídeo 1](https://www.youtube.com/watch?v=EfF1M7myAyY)
     - Vídeo curto (12 minutos) explicando de forma geral o que são estruturas de dados, suas aplicações e alguns exemplos 
 - [Vídeo 2](https://www.youtube.com/watch?v=CBYHwZcbD-s)
