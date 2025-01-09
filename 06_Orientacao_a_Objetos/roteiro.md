@@ -8,7 +8,7 @@
 ## Códigos
 
 - Essa aula possui um arquivo com códigos de exemplos, mostrando a sintaxe correta para a aplicação dos conceitos apresentados na aula
-- Na próxima aula, focaremos ainda mais na aplicação e implementação desses conceitos com Java
+- Também há a resolução da atividade proposta na pasta `resolucao-atividade
 
 ## Links Úteis
 
@@ -29,7 +29,7 @@
 
 - **Criador de Conteúdo:**
   - *Fireship*
-  - Fireship é um canal em inglês que possui diversos vídeos curtos introduzindo conceitos ou tecnologias improtantes no mundo do TI
+  - Fireship é um canal em inglês que possui diversos vídeos curtos introduzindo conceitos ou tecnologias importantes no mundo do TI
   - Ele também possui um quadro semanal onde comenta sobre as notícias mais importantes da semana
   - A edição é bastante dinâmica e rápida, mas bem leve e descontraída também
   - [Canal](https://www.youtube.com/@Fireship)
@@ -40,4 +40,6 @@
 
 ## Referências
 
-- Essa aula foi desenvolvida com base nos seguintes sites e artigos:
+- Essa aula foi desenvolvida com base nos seguintes recursos:
+  - Capítulos 7, 8 e 9 do livro **Use a Cabeça Java**, por *Kathy Sierra*, *Bert Bates* e *Trisha Gee*
+  - Artigos da sessão **OOP** da [rota de Java](https://roadmap.sh/java) no site **roadmap.sh**

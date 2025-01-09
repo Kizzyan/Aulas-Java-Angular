@@ -1,23 +1,3 @@
-class Exemplos {
-  public static void main(String[] args) {
-    
-  }
-}
-
-class Animal {
-  String nome;
-  float peso;
-  int idade;
-
-  void dormir() {
-    System.out.println("Dormiu.");
-  }
-
-  void comer() {
-    System.out.println("Comeu.");
-  }
-}
-
 // Sobrescrita de método
 public class Animal {
    public String emitirSom() {
@@ -26,7 +6,7 @@ public class Animal {
 }
 
 public class Gato extends Animal {
-   @Override
+   @Override // a anotação @Override é essencial para sobrescever métodos herdados
    public String emitirSom() {
       return "Miau";
    }
@@ -60,6 +40,7 @@ public class Cao extends Animal {
 class Pessoa {
   private int idade;
 
+  // Nesse caso, o Encapsulamento também está permitindo a validação dos dados recebidos
   public void setIdade (int idade) {
     if (idade >= 0) {
       this.idade = idade;
@@ -67,17 +48,41 @@ class Pessoa {
   }
 }
 
-// Abstração
 // Interfaces
-interface Emprego {
+interface Empregado {
   void trabalhar();
 }
 
-class Barista implements Emprego {
+interface Sociavel {
+  void conversar();
+}
+
+class Barista implements Empregado, Sociavel {
   @override
   void trabalhar () {
     System.out.println("Misturar drinks.");
   }
+
+  @override
+  void conversar () {
+    System.out.println("Conversar com os clientes.");
+  }
 }
 
+// Classes Abstratas
+abstract class Mamifero {
+  public void dormir () {
+    System.out.println("zzz...");
+  }
 
+  public void descreverHabitosAlimentares();
+}
+
+class Leao extends Mamifero {
+  // dormir já está herdado e não precisa ser sobrescrito
+
+  @Override
+  public void descreverHabitosAlimentares () {
+    System.out.println("Leões são carnívoros.");
+  }
+}
