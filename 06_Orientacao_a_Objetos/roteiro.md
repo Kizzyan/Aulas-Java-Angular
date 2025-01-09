@@ -12,7 +12,7 @@
 
 ## Links Úteis
 
-- [Anotações da Aula](https://excalidraw.com/#json=J0rZwc91yTa9ImDt1gko6,asHjG4GExLLM760POz2sOQ)
+- [Anotações da Aula](https://excalidraw.com/#json=APMJHvit-5tfxhRnBPI4H,FkndyGchc7VigV20X9a8RQ)
 - [Vídeo 1](https://www.youtube.com/watch?v=UubmwhIbHUY)
   - Esse vídeo é apenas um meme que exemplifica a importância de ser racional na hora de fazer uso de OOP
 - [Vídeo 2](https://www.youtube.com/watch?v=dXZRgW-X2ls&pp=ygUWb3JpZW50YcOnw6NvIGEgb2JqZXRvcw%3D%3D)
