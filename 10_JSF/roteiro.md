@@ -11,7 +11,7 @@
 
 ## Links Úteis
 
-- [Anotações da Aula](https://excalidraw.com/#json=umNykRAuWcPAqYjOsz8k8,K-8bIpd8ped17aP39jDFiA)
+- [Anotações da Aula](https://excalidraw.com/#json=DJn17d-ClvRvGOkMnXBwW,dJdWDeYVU_FIBnUJJDbRpw)
 - [Vídeo 1](https://www.youtube.com/watch?v=3Cj2mDx0-Ws)
   - Rápida introdução ao que é JSF e suas características
 - [Vídeo 2](https://www.youtube.com/watch?v=ezwgBvsd6Ps)
