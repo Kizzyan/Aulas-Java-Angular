@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+  <head>
+    <meta charset="UTF-8">
+    <title>Livros</title>
+    <link rel="stylesheet" href="styles/style.css">
+  </head>
+  <body>
+    <div th:insert="~{parts/navigation::navigation}"></div>
+    <div class="titulo">
+      <h1>Bem vindo à página de Livros <span th:text="${userLogin}"></span></h1>
+    </div>
+    <div class="container">
+      <a href="/livros/criar">Adicionar novo livro</a>
+      <div id="table_wrapper">
+        <div id="table_scroll">
+          <table>
+            <tr>
+              <th>Título</th>
+              <th>Autor</th>
+              <th>Ano</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <th:block th:each="livro : ${usuarioLivros}">
+              <tr>
+                <td th:text="${livro.titulo}"></td>
+                <td th:text="${livro.autor}"></td>
+                <td th:text="${livro.ano}"></td>
+                <td><button><a th:href="@{|/livros/editar/${livro.titulo}|}">Editar</a></button></td>
+                <td sec:authorize="hasRole('ADMIN')"><button><a th:href="@{|/livros/excluir/${livro.titulo}|}">Excluir</a></button></td>
+              </tr>
+            </th:block>
+          </table>
+        </div>
+      </div>
+      <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout">
+      </form>
+    </div>
+    <div th:insert="~{parts/footer :: footer}"></div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="" rel="stylesheet">
+</head>
+<body>
+    <div th:insert="~{parts/navigation::navigation}"></div>
+    <div class="titulo">
+      <h1>Essa é a Home Page</h1>
+    </div>
+    <div class="container">
+        <p><a href="/login">Login</a></p>
+        <p>Não possui uma conta? Registre-se abaixo</p>
+        <p><a href="/registrar">Registrar</a></p>
+    </div>
+    <div th:insert="~{parts/footer :: footer}"></div>
+</body>
+</html>

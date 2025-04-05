@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Criar Livro</title>
+    <link rel="stylesheet" href="styles/style.css">
+  </head>
+  <body>
+    <div th:insert="~{parts/navigation::navigation}"></div>
+    <div class="titulo">
+      <h1>Criar Livro</h1>
+    </div>
+    <div class="container">
+      <div class="form_box">
+        <form method="post" action="/livros/criarlivro" th:object="${novoLivro}">
+          <input type="text" name="titulo", placeholder="Título">
+          <input type="text" name="autor", placeholder="Autor">
+          <input type="number" name="ano", placeholder="Ano">
+          <input type="submit" value="Salvar">
+        </form>
+      </div>
+    </div>
+    <div th:insert="~{parts/footer :: footer}"></div>
+  </body>
+</html>

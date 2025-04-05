@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Livro</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<form method="post" th:action="@{/livros/editarlivro}" th:object="${livroEditado}">
+    <input type="text" name="titulo" , placeholder="Título" th:value="${livroEditado.titulo}">
+    <input type="text" name="autor" , placeholder="Autor" th:value="${livroEditado.autor}">
+    <input type="number" name="ano" , placeholder="Ano" th:value="${livroEditado.ano}">
+    <input type="submit" value="Editar">
+</form>
+</body>
+</html>
