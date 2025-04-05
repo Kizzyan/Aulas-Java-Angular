@@ -1,6 +1,6 @@
-package com.exemplo.ssr.service;
+package com.exemplo.rest.service;
 
-import com.exemplo.ssr.model.Livro;
+import com.exemplo.rest.model.Livro;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

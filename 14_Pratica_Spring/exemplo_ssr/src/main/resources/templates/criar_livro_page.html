@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Criar Livro</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
   </head>
   <body>
     <div th:insert="~{parts/navigation::navigation}"></div>
@@ -12,10 +12,10 @@
     </div>
     <div class="container">
       <div class="form_box">
-        <form method="post" action="/livros/criarlivro" th:object="${novoLivro}">
-          <input type="text" name="titulo", placeholder="Título">
-          <input type="text" name="autor", placeholder="Autor">
-          <input type="number" name="ano", placeholder="Ano">
+        <form class="livro_form" method="post" th:action="@{/livros/criarlivro}" th:object="${novoLivro}">
+          <input type="text" name="titulo", placeholder="Título" th:value="${novoLivro.titulo}">
+          <input type="text" name="autor", placeholder="Autor" th:value="${novoLivro.autor}">
+          <input type="number" name="ano", placeholder="Ano" th:value="${novoLivro.ano}">
           <input type="submit" value="Salvar">
         </form>
       </div>

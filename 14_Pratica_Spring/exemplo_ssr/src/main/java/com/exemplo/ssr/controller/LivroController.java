@@ -27,7 +27,7 @@ public class LivroController {
 
         model.addAttribute(USER_LOGIN, username);
 
-        List<Livro> livros = service.listarLivros(username);
+        List<Livro> livros = service.listarLivros();
 
         model.addAttribute("usuarioLivros", livros);
         return "livro_page";
@@ -35,13 +35,13 @@ public class LivroController {
 
     @GetMapping("/criar")
     public String getCriarLivroPage(Model model) {
-        model.addAttribute("newBook", new Livro());
+        model.addAttribute("novoLivro", new Livro());
         return "criar_livro_page";
     }
 
     @PostMapping("/criarlivro")
-    public String criarLivro(@ModelAttribute Livro book) {
-        service.salvar(book);
+    public String criarLivro(@ModelAttribute Livro livro) {
+        service.salvar(livro);
         return "redirect:/livros";
     }
 

@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>Editar Livro</title>
-    <link rel="stylesheet" href="styles/style.css">
-</head>
-<body>
-<form method="post" th:action="@{/livros/editarlivro}" th:object="${livroEditado}">
-    <input type="text" name="titulo" , placeholder="Título" th:value="${livroEditado.titulo}">
-    <input type="text" name="autor" , placeholder="Autor" th:value="${livroEditado.autor}">
-    <input type="number" name="ano" , placeholder="Ano" th:value="${livroEditado.ano}">
-    <input type="submit" value="Editar">
-</form>
-</body>
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+  </head>
+  <body>
+    <div th:insert="~{parts/navigation::navigation}"></div>
+    <div class="titulo">
+      <h1>Criar Livro</h1>
+    </div>
+    <div class="container">
+      <div class="form_box">
+        <form class="livro_form" method="post" th:action="@{/livros/editarlivro}" th:object="${livroEditado}">
+          <input type="text" name="titulo", placeholder="Título" th:value="${livroEditado.titulo}">
+          <input type="text" name="autor", placeholder="Autor" th:value="${livroEditado.autor}">
+          <input type="number" name="ano", placeholder="Ano" th:value="${livroEditado.ano}">
+          <input type="submit" value="Editar">
+        </form>
+      </div>
+    </div>
+    <div th:insert="~{parts/footer :: footer}"></div>
+  </body>
 </html>

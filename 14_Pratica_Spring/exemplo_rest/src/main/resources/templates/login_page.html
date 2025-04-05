@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/style.css">
+  </head>
+  <body>
+    <div th:insert="~{parts/navigation::navigation}"></div>
+    <div class="titulo">
+      <h1>Login Page</h1>
+    </div>
+    <div class="container">
+      <div class="form_box">
+        <div class="msg_sucesso" th:if="${param.success}">
+          Registro bem sucedido. Agora use suas credenciais para realizar o login.
+        </div>
+        <div class="msg_erro" th:if="${param.error}">
+          Login ou senha incorreta.
+        </div>
+        <div th:unless="${param.error}">
+          <br>
+        </div>
+        <div th:if="${param.logout}">
+          Você foi deslogado.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+          <input name="username" type="text" placeholder="Nome"> </br>
+          <input name="password" type="password" placeholder="Senha"> </br>
+          <input type="submit" value="Log in">
+        </form>
+      </div>
+      <p><a href="/">Voltar à Home</a></p>
+      <p>Não possui uma conta? <a href="/registrar">Registre-se</a></p>
+    </div>
+    <div th:insert="~{parts/footer :: footer}"></div>
+  </body>
+</html>
