@@ -6,14 +6,21 @@ export const routes: Routes = [
     pathMatch: 'full',
     loadComponent: async () => {
       const m = await import('./components/home/home.component');
-        return m.HomeComponent;
+      return m.HomeComponent;
     },
   },
   {
-    path: 'todos',
+    path: 'funcionarios',
     loadComponent: () => {
       return import('./components/funcionarios/funcionarios.component')
-                    .then(m => m.FuncionariosComponent);
+        .then(m => m.FuncionariosComponent);
+    },
+  },
+  {
+    path: 'filmes',
+    loadComponent: () => {
+      return import('./components/filmes/filmes.component')
+        .then(m => m.FilmesComponent);
     },
   },
 ];
