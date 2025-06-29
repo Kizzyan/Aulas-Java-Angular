@@ -1,0 +1,73 @@
+<main class="flex justify-content-center">
+  <p-card header="Login" styleClass="w-full md:w-30rem">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+      <div class="field">
+        <p-floatlabel variant="on">
+            <input 
+                [style]="{'width': '100%'}"
+                type="email" 
+                pInputText 
+                id="email" 
+                name="email"
+                [(ngModel)]="usuario.email"
+                #email="ngModel"
+                required
+                email
+                [ngClass]="{'ng-invalid ng-dirty': email.invalid && email.dirty}"
+            />
+            <label for="email">Email</label>
+        </p-floatlabel>
+        <small 
+          class="p-error block" 
+          *ngIf="email.errors?.['required'] && email.touched"
+        >
+          Email é obrigatório
+        </small>
+        <small 
+          class="p-error block" 
+          *ngIf="email.errors?.['email'] && email.touched"
+        >
+            Insira um email válido
+        </small>
+      </div>
+
+      <div class="field">
+        <p-floatlabel variant="on">
+            <p-password 
+                [style]="{'width': '100%'}"
+                [inputStyle]="{'width':'100%'}"
+                id="senha" 
+                name="senha"
+                [(ngModel)]="usuario.senha"
+                #senha="ngModel"
+                required
+                minlength="6"
+                [feedback]="false" 
+                [toggleMask]="true"
+                [ngClass]="{'ng-invalid ng-dirty': senha.invalid && senha.dirty}"
+            ></p-password>
+            <label for="senha">Senha</label>
+        </p-floatlabel>
+        <small 
+          class="p-error block" 
+          *ngIf="senha.errors?.['required'] && senha.touched"
+        >
+          Senha é obrigatória
+        </small>
+      </div>
+
+      <div class="centered">
+        <p-button 
+          type="submit" 
+          label="Enviar" 
+          [disabled]="loginForm.invalid"
+        ></p-button>
+      </div>
+    </form>
+    <p-divider />
+    <div class="centered">
+      <span>Não possui uma conta? <a [routerLink]="'/cadastro'"><b>Cadastre-se</b></a></span>
+    </div>
+  </p-card>
+  <p-toast position="bottom-right" />
+</main>

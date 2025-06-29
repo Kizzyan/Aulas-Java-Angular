@@ -1,0 +1,47 @@
+@use "primeicons/primeicons.css";
+@use "tailwindcss";
+@plugin "tailwindcss-primeui";
+
+html,
+body {
+    height: 95%;
+    width: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    p-card {
+        width: 450px;
+    }
+}
+
+small {
+    position: absolute;
+}
+
+.field {
+    margin: 25px 0;
+    width: 100%;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: end;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+}
+
+th, td {
+    text-align: center;
+}

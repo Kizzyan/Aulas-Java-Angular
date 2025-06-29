@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegistrarUsuarioDto {
+public class RegistroRequest {
     @NotBlank(message = "Email não pode estar vazio")
     @Email(message = "Email inválido")
     private String email;

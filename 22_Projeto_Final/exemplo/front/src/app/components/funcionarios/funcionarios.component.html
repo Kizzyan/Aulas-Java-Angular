@@ -1,0 +1,118 @@
+<main>
+    <p-card>
+        <div class="centered">
+            <b class="p-card-title">Funcionários</b>
+            <p-button (onClick)="mostrarModal()" pTooltip="Adicionar funcionário" tooltipPosition="top" icon="pi pi-plus" size="small" />
+        </div>
+        <p-table [value]="funcionarios()" [scrollable]="true" scrollDirection="both" [scrollHeight]="'flex'">
+            <ng-template #header>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Data de Nascimento</th>
+                    <th>Cargo</th>
+                    <th>Ações</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-funcionario>
+                <tr>
+                    <td>{{ funcionario.id }}</td>
+                    <td>{{ funcionario.nome }}</td>
+                    <td>{{ funcionario.dataNascimento | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{ funcionario.cargo.descricao }}</td>
+                    <td>
+                        <div class="centered">
+                            <p-button pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil" size="small" />
+                            <p-button pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" size="small" />
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-card>
+
+    <p-dialog header="Adicionar Funcionário" [modal]="true" [(visible)]="isModalVisivel" [style]="{ width: '25rem' }">
+        <form #funcForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="field">
+                <p-floatlabel variant="on">
+                    <input 
+                        [style]="{'width': '100%'}"
+                        type="text" 
+                        pInputText 
+                        id="nome" 
+                        name="nome"
+                        [(ngModel)]="novoFuncionario.nome"
+                        #nome="ngModel"
+                        required
+                        maxLength="50"
+                        [ngClass]="{'ng-invalid ng-dirty': nome.invalid && nome.dirty}"
+                    />
+                    <label for="nome">Nome</label>
+                </p-floatlabel>
+                <small class="p-error block" *ngIf="nome.errors?.['required'] && nome.touched">
+                    Nome é obrigatório
+                </small>
+            </div>
+            <div class="field">
+                <p-floatlabel variant="on">
+                    <p-datepicker
+                        dateFormat="dd/mm/yy"
+                        appendTo="body"
+                        [inputStyle]="{'width': '100%'}"
+                        [style]="{'width': '100%'}"
+                        id="dataNasc" 
+                        name="dataNasc"
+                        [(ngModel)]="novoFuncionario.dataNascimento"
+                        #dataNasc="ngModel"
+                        required
+                        inputId="on_label"
+                        showIcon
+                        iconDisplay="input"
+                        [ngClass]="{'ng-invalid ng-dirty': dataNasc.invalid && dataNasc.dirty}"
+                    />
+                    <label for="on_label">Data Nascimento</label>
+                </p-floatlabel>
+                <small class="p-error block" *ngIf="dataNasc.errors?.['required'] && dataNasc.touched">
+                    Data de Nascimento é obrigatória
+                </small>
+            </div>
+            <div class="field">
+                <p-floatlabel variant="on">
+                    <p-select 
+                        appendTo="body"
+                        [style]="{'width': '100%'}"
+                        id="funcCargo" 
+                        name="funcCargo"
+                        #funcCargo="ngModel"
+                        [options]="cargos()" 
+                        [(ngModel)]="novoFuncionario.cargo" 
+                        optionLabel="descricao"
+                        [filter]="true"
+                        filterBy="descricao" 
+                        [showClear]="true"
+                        required
+                    >
+                        <ng-template #selecionado let-selecionado>
+                            <div>
+                                <div>{{ selecionado.descricao }}</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-cargo #cargo>
+                            <div>
+                                <div>{{ cargo.descricao }}</div>
+                            </div>
+                        </ng-template>
+                    </p-select>
+                    <label for="on_label">Cargo</label>
+                </p-floatlabel>
+                <small class="p-error block" *ngIf="funcCargo.errors?.['required'] && funcCargo.touched">
+                Cargo é obrigatório 
+                </small>
+            </div>
+            <div class="flex justify-end gap-2">
+                <p-button label="Cancelar" severity="secondary" (click)="isModalVisivel = false" />
+                <p-button label="Salvar" type="submit" [disabled]="funcForm.invalid"/>
+            </div>
+        </form>
+    </p-dialog>
+</main>

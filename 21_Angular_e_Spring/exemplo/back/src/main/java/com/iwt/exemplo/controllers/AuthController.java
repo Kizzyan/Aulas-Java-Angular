@@ -1,8 +1,9 @@
 package com.iwt.exemplo.controllers;
 
 import com.iwt.exemplo.dtos.LoginResponse;
-import com.iwt.exemplo.dtos.LoginUsuarioDto;
-import com.iwt.exemplo.dtos.RegistrarUsuarioDto;
+import com.iwt.exemplo.dtos.LoginRequest;
+import com.iwt.exemplo.dtos.RegistroRequest;
+import com.iwt.exemplo.dtos.RegistroResponse;
 import com.iwt.exemplo.models.Usuario;
 import com.iwt.exemplo.services.AuthService;
 import com.iwt.exemplo.services.JwtService;
@@ -25,14 +26,14 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/registrar")
-    public ResponseEntity<Usuario> registrar(@Valid @RequestBody RegistrarUsuarioDto dto) {
-        Usuario usuarioRegistrado = authService.registrar(dto);
+    @PostMapping("/cadastro")
+        public ResponseEntity<RegistroResponse> registrar(@RequestBody RegistroRequest dto) {
+        RegistroResponse usuarioRegistrado = authService.registrar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRegistrado);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> autenticar(@Valid @RequestBody LoginUsuarioDto dto) {
+    public ResponseEntity<LoginResponse> autenticar(@RequestBody LoginRequest dto) {
         Usuario usuarioAutenticado = authService.autenticar(dto);
         String jwtToken = jwtService.generateToken(usuarioAutenticado);
         LoginResponse loginResponse = LoginResponse.builder().token(jwtToken).expiresIn(jwtService.getExpirationTime()).build();

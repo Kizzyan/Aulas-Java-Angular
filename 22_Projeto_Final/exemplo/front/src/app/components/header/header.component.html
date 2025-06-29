@@ -1,0 +1,18 @@
+<p-toolbar [style]="{'border': 'none', 'border-radius': '0', 'padding': '15px 20px'}">
+    <ng-template #start>
+        <a [routerLink]="'/'">
+            <b [style]="{'font-size': '25px'}">ERP Protótipo</b>
+        </a>
+    </ng-template>
+    <ng-template #end>
+        <a [routerLink]="'/funcionarios'">
+            <p-button pTooltip="Funcionários" tooltipPosition="bottom" size="large" icon="pi pi-users" class="btn" text severity="secondary" />
+        </a>
+        <a [routerLink]="'/cargos'">
+            <p-button pTooltip="Cargos" tooltipPosition="bottom" size="large" icon="pi pi-id-card" class="btn" text severity="secondary" />
+        </a>
+        @if (authService.isLoggedIn()) {
+        <p-button (onClick)="logout()" pTooltip="Sair" tooltipPosition="bottom" size="large" icon="pi pi-sign-out" class="btn" text severity="secondary" />
+        }
+    </ng-template>
+</p-toolbar>

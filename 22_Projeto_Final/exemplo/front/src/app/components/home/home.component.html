@@ -1,0 +1,136 @@
+<main class="flex justify-content-center">
+  <p-card header="{{isAtualizando ? 'Atualizando' : 'Bem vindo(a)'}} {{usuario.nome}}" styleClass="w-full md:w-30rem">
+    <form #atualizacaoForm="ngForm" (ngSubmit)="atualizar(atualizacaoForm)">
+      <div class="field">
+        <p-floatlabel variant="on">
+            <input 
+                [style]="{'width': '100%'}"
+                type="text" 
+                pInputText 
+                id="nome" 
+                name="nome"
+                [(ngModel)]="usuario.nome"
+                #nome="ngModel"
+                required
+                maxLength="50"
+                [ngClass]="{'ng-invalid ng-dirty': nome.invalid && nome.dirty}"
+                [disabled]="!isAtualizando"
+            />
+            <label for="nome">Nome</label>
+        </p-floatlabel>
+        <small 
+          class="p-error block" 
+          *ngIf="nome.errors?.['required'] && nome.touched"
+        >
+          Nome é obrigatório
+        </small>
+      </div>
+      <div class="field">
+        <p-floatlabel variant="on">
+            <input 
+                [style]="{'width': '100%'}"
+                type="email" 
+                pInputText 
+                id="email" 
+                name="email"
+                [(ngModel)]="usuario.email"
+                #email="ngModel"
+                required
+                email
+                maxLength="50"
+                [ngClass]="{'ng-invalid ng-dirty': email.invalid && email.dirty}"
+                [disabled]="!isAtualizando"
+            />
+            <label for="email">Email</label>
+        </p-floatlabel>
+        <small 
+          class="p-error block" 
+          *ngIf="email.errors?.['required'] && email.touched"
+        >
+          Email é obrigatório
+        </small>
+        <small 
+          class="p-error block" 
+          *ngIf="email.errors?.['email'] && email.touched"
+        >
+            Insira um email válido
+        </small>
+      </div>
+
+      @if (isAtualizando) {
+      <div class="field">
+        <p-floatlabel variant="on">
+            <p-password 
+                [style]="{'width': '100%'}"
+                [inputStyle]="{'width':'100%'}"
+                id="senha" 
+                name="senha"
+                [(ngModel)]="novaSenha"
+                #senha="ngModel"
+                minlength="6"
+                maxLength="120"
+                [feedback]="false" 
+                [toggleMask]="true"
+                [ngClass]="{'ng-invalid ng-dirty': senha.invalid && senha.dirty}"
+            ></p-password>
+            <label for="senha">Nova senha</label>
+        </p-floatlabel>
+        <small 
+          class="p-error block" 
+          *ngIf="senha.errors?.['minlength'] && senha.touched"
+        >
+          Senha deve conter no mínimo 6 caracteres
+        </small>
+      </div>
+
+      <div class="field">
+        <p-floatlabel variant="on">
+            <p-password 
+                [style]="{'width': '100%'}"
+                [inputStyle]="{'width':'100%'}"
+                id="confirmaSsenha" 
+                name="confirmarSenha"
+                [(ngModel)]="confirmarNovaSenha"
+                #confirmarSenha="ngModel"
+                maxLength="120"
+                [feedback]="false" 
+                [toggleMask]="true"
+                [ngClass]="{'ng-invalid ng-dirty': (confirmarSenha.invalid || novaSenha !== confirmarNovaSenha) && confirmarSenha.dirty}"
+            ></p-password>
+            <label for="confirmsenha">Confirmar nova senha</label>
+        </p-floatlabel>
+        <small 
+          class="p-error block" 
+          *ngIf="novaSenha !== confirmarNovaSenha && confirmarSenha.touched"
+        >
+          Senha não coincidem
+        </small>
+      </div>
+      }
+
+
+    @if (!isAtualizando) {
+        @for (role of usuario.roles; track $index) {
+            <p-chip [label]="role" />
+        }
+    }
+
+
+      <div class="centered">
+        <p-button 
+          (onClick)="setAtualizacao()"
+          type="button" 
+          [label]="isAtualizando ? 'Cancelar' : 'Atualizar'" 
+        ></p-button>
+        @if (isAtualizando) {
+            <p-button 
+            type="submit" 
+            label="Enviar" 
+            [disabled]="atualizacaoForm.invalid || novaSenha != confirmarNovaSenha"
+            ></p-button>
+        }
+      </div>
+    </form>
+
+  </p-card>
+</main>

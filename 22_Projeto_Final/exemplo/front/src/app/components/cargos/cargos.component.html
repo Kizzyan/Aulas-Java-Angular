@@ -1,0 +1,58 @@
+<main>
+    <p-card>
+        <div class="centered">
+            <b class="p-card-title">Cargos</b>
+            <p-button (onClick)="mostrarModal()" pTooltip="Adicionar cargo" tooltipPosition="top" icon="pi pi-plus" size="small" />
+        </div>
+        <p-table [value]="cargos()" [scrollable]="true" scrollDirection="both" [scrollHeight]="'flex'">
+            <ng-template #header>
+                <tr>
+                    <th>Id</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-cargo>
+                <tr>
+                    <td>{{ cargo.id }}</td>
+                    <td>{{ cargo.descricao }}</td>
+                    <td>
+                        <div class="centered">
+                            <p-button pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil" size="small" />
+                            <p-button pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" size="small" />
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-card>
+
+    <p-dialog header="Adicionar Cargo" [modal]="true" [(visible)]="isModalVisivel" [style]="{ width: '25rem' }">
+        <form #cargoForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="field">
+                <p-floatlabel variant="on">
+                    <input 
+                        [style]="{'width': '100%'}"
+                        type="text" 
+                        pInputText 
+                        id="descricao" 
+                        name="descricao"
+                        [(ngModel)]="novoCargo.descricao"
+                        #descricao="ngModel"
+                        required
+                        maxLength="50"
+                        [ngClass]="{'ng-invalid ng-dirty': descricao.invalid && descricao.dirty}"
+                    />
+                    <label for="nome">Nome</label>
+                </p-floatlabel>
+                <small class="p-error block" *ngIf="descricao.errors?.['required'] && descricao.touched">
+                    Descrição é obrigatória
+                </small>
+            </div>
+            <div class="flex justify-end gap-2">
+                <p-button label="Cancelar" severity="secondary" (click)="isModalVisivel = false" />
+                <p-button label="Salvar" type="submit" [disabled]="cargoForm.invalid"/>
+            </div>
+        </form>
+    </p-dialog>
+</main>

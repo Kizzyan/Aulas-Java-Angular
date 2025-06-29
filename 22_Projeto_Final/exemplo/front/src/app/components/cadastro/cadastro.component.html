@@ -1,0 +1,135 @@
+<main class="flex justify-content-center">
+  <p-card header="Cadastro" styleClass="w-full md:w-30rem">
+    <form #cadastroForm="ngForm" (ngSubmit)="onSubmit(cadastroForm)">
+      <div class="field">
+        <p-floatlabel variant="on">
+            <input 
+                [style]="{'width': '100%'}"
+                type="text" 
+                pInputText 
+                id="nome" 
+                name="nome"
+                [(ngModel)]="usuario.nome"
+                #nome="ngModel"
+                required
+                maxLength="50"
+                [ngClass]="{'ng-invalid ng-dirty': nome.invalid && nome.dirty}"
+            />
+            <label for="nome">Nome</label>
+        </p-floatlabel>
+        <small 
+          class="p-error block" 
+          *ngIf="nome.errors?.['required'] && nome.touched"
+        >
+          Nome é obrigatório
+        </small>
+      </div>
+
+      <div class="field">
+        <p-floatlabel variant="on">
+            <input 
+                [style]="{'width': '100%'}"
+                type="email" 
+                pInputText 
+                id="email" 
+                name="email"
+                [(ngModel)]="usuario.email"
+                #email="ngModel"
+                required
+                email
+                maxLength="50"
+                [ngClass]="{'ng-invalid ng-dirty': email.invalid && email.dirty}"
+            />
+            <label for="email">Email</label>
+        </p-floatlabel>
+        <small 
+          class="p-error block" 
+          *ngIf="email.errors?.['required'] && email.touched"
+        >
+          Email é obrigatório
+        </small>
+        <small 
+          class="p-error block" 
+          *ngIf="email.errors?.['email'] && email.touched"
+        >
+            Insira um email válido
+        </small>
+      </div>
+
+      <div class="field">
+        <p-floatlabel variant="on">
+            <p-password 
+                [style]="{'width': '100%'}"
+                [inputStyle]="{'width':'100%'}"
+                id="senha" 
+                name="senha"
+                [(ngModel)]="usuario.senha"
+                #senha="ngModel"
+                required
+                minlength="6"
+                maxLength="120"
+                [feedback]="false" 
+                [toggleMask]="true"
+                [ngClass]="{'ng-invalid ng-dirty': senha.invalid && senha.dirty}"
+            ></p-password>
+            <label for="senha">Senha</label>
+        </p-floatlabel>
+        <small 
+          class="p-error block" 
+          *ngIf="senha.errors?.['required'] && senha.touched"
+        >
+          Senha é obrigatória
+        </small>
+        <small 
+          class="p-error block" 
+          *ngIf="senha.errors?.['minlength'] && senha.touched"
+        >
+          Senha deve conter no mínimo 6 caracteres
+        </small>
+      </div>
+
+      <div class="field">
+        <p-floatlabel variant="on">
+            <p-password 
+                [style]="{'width': '100%'}"
+                [inputStyle]="{'width':'100%'}"
+                id="confirmsenha" 
+                name="confirmsenha"
+                [(ngModel)]="usuario.confirmarSenha"
+                #confirmarSenha="ngModel"
+                required
+                maxLength="120"
+                [feedback]="false" 
+                [toggleMask]="true"
+                [ngClass]="{'ng-invalid ng-dirty': (confirmarSenha.invalid || usuario.senha !== usuario.confirmarSenha) && confirmarSenha.dirty}"
+            ></p-password>
+            <label for="confirmsenha">Confirmar senha</label>
+        </p-floatlabel>
+        <small 
+          class="p-error block" 
+          *ngIf="confirmarSenha.errors?.['required'] && confirmarSenha.touched"
+        >
+          Confirme sua senha
+        </small>
+        <small 
+          class="p-error block" 
+          *ngIf="usuario.senha !== usuario.confirmarSenha && confirmarSenha.touched"
+        >
+          Senha não coincidem
+        </small>
+      </div>
+
+      <div class="centered">
+        <p-button 
+          type="submit" 
+          label="Enviar" 
+          [disabled]="cadastroForm.invalid || usuario.senha != usuario.confirmarSenha"
+        ></p-button>
+      </div>
+    </form>
+    <p-divider />
+    <div class="centered">
+      <span>Já possui uma conta? <a [routerLink]="'/login'"><b>Faça login</b></a></span>
+    </div>
+  </p-card>
+</main>
