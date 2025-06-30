@@ -14,11 +14,12 @@ import { ButtonModule } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { TooltipModule } from 'primeng/tooltip';
 import { catchError } from 'rxjs';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { DatePickerModule } from 'primeng/datepicker';
 import { SelectModule } from 'primeng/select';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @Component({
   selector: 'app-funcionarios',
@@ -34,7 +35,8 @@ import { SelectModule } from 'primeng/select';
     ToastModule,
     DialogModule,
     DatePickerModule,
-    SelectModule
+    SelectModule,
+    ConfirmPopupModule
   ],
   templateUrl: './funcionarios.component.html',
   styleUrl: './funcionarios.component.scss'
@@ -43,10 +45,13 @@ export class FuncionariosComponent implements OnInit {
   funcionarioService = inject(FuncionariosService);
   cargosService = inject(CargosService);
   messageService = inject(MessageService)
+  confirmationService = inject(ConfirmationService)
   funcionarios = signal<Array<Funcionario>>([]);
   cargos = signal<Array<Cargo>>([]);
   novoFuncionario = new Funcionario();
-  isModalVisivel: boolean = false;
+  funcionarioAtualizado = new Funcionario();
+  isCadastrarVisivel: boolean = false;
+  isAtualizarVisivel: boolean = false;
 
   ngOnInit(): void {
     this.listarFuncionarios();
@@ -69,6 +74,25 @@ export class FuncionariosComponent implements OnInit {
       });
   }
 
+    buscarPorId(id: number) {
+    this.funcionarioService.buscar(id)
+      .pipe(
+        catchError((err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error.descricao
+          });
+          throw err;
+        })
+      )
+      .subscribe((data) => {
+        this.funcionarioAtualizado = data;
+        let dataNascimento: string = data.dataNascimento?.toString() || "";
+        this.funcionarioAtualizado.dataNascimento = new Date(dataNascimento);
+      });
+  }
+
   listarCargos() {
     this.cargosService.listar()
       .pipe(
@@ -86,9 +110,67 @@ export class FuncionariosComponent implements OnInit {
       });
   }
 
-  mostrarModal() {
-    this.isModalVisivel = true;
+  mostrarModalCadastrar() {
+    this.isCadastrarVisivel = true;
     this.listarCargos();
+  }
+
+  mostrarModalAtualizar(id: number) {
+    this.isAtualizarVisivel = true;
+    this.listarCargos();
+    this.buscarPorId(id);
+  }
+
+    excluir(id: number, event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Deseja mesmo excluir esse funcionário?',
+      icon: 'pi pi-exclamation-triangle',
+      rejectButtonProps: {
+        label: 'Cancel',
+        severity: 'secondary',
+        outlined: true
+      },
+      acceptButtonProps: {
+        label: 'Excluir'
+      },
+      accept: () => {
+        this.funcionarioService.excluir(id)
+          .pipe(
+            catchError((err) => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Erro',
+                detail: err.error.descricao
+              });
+              throw err;
+            })
+          )
+          .subscribe(() => {
+            this.listarFuncionarios();
+            this.messageService.add({ severity: 'info', summary: 'Sucesso', detail: 'Funcionário excluído com sucesso', life: 3000 });
+          });
+      },
+    });
+  }
+
+  atualizar(id: number | undefined) {
+    this.funcionarioService.salvar(this.funcionarioAtualizado)
+      .pipe(
+        catchError((err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error.descricao
+          });
+          throw err;
+        })
+      )
+      .subscribe(() => {
+        this.isAtualizarVisivel = false;
+        this.listarFuncionarios();
+        this.messageService.add({ severity: 'info', summary: 'Sucesso', detail: 'Funcionário atualizado com sucesso', life: 3000 });
+      });
   }
 
   onSubmit() {
@@ -104,7 +186,7 @@ export class FuncionariosComponent implements OnInit {
         })
       )
       .subscribe(() => {
-        this.isModalVisivel = false;
+        this.isCadastrarVisivel = false;
         this.novoFuncionario = new Funcionario();
         this.listarFuncionarios();
       });

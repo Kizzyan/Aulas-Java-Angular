@@ -13,7 +13,7 @@ export class UsuariosService {
     return this.http.get<Usuario>(`${this.url}/${id}`);
   }
 
-  atualizar(usuario: Usuario, id: number) {
+  atualizar(usuario: Usuario, id: number | undefined) {
     return this.http.put<Usuario>(`${this.url}/atualizar/${id}`, usuario);
   }
 }

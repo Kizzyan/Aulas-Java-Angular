@@ -2,7 +2,7 @@
     <p-card>
         <div class="centered">
             <b class="p-card-title">Cargos</b>
-            <p-button (onClick)="mostrarModal()" pTooltip="Adicionar cargo" tooltipPosition="top" icon="pi pi-plus" size="small" />
+            <p-button (onClick)="mostrarModalCadastrar()" pTooltip="Adicionar cargo" tooltipPosition="top" icon="pi pi-plus" size="small" />
         </div>
         <p-table [value]="cargos()" [scrollable]="true" scrollDirection="both" [scrollHeight]="'flex'">
             <ng-template #header>
@@ -18,8 +18,8 @@
                     <td>{{ cargo.descricao }}</td>
                     <td>
                         <div class="centered">
-                            <p-button pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil" size="small" />
-                            <p-button pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" size="small" />
+                            <p-button (onClick)="mostrarModalAtualizar(cargo.id)" pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil" size="small" />
+                            <p-button (onClick)="excluir(cargo.id, $event)" pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" size="small" />
                         </div>
                     </td>
                 </tr>
@@ -27,7 +27,7 @@
         </p-table>
     </p-card>
 
-    <p-dialog header="Adicionar Cargo" [modal]="true" [(visible)]="isModalVisivel" [style]="{ width: '25rem' }">
+    <p-dialog header="Adicionar Cargo" [modal]="true" [(visible)]="isCadastrarVisivel" [style]="{ width: '25rem' }">
         <form #cargoForm="ngForm" (ngSubmit)="onSubmit()">
             <div class="field">
                 <p-floatlabel variant="on">
@@ -50,9 +50,41 @@
                 </small>
             </div>
             <div class="flex justify-end gap-2">
-                <p-button label="Cancelar" severity="secondary" (click)="isModalVisivel = false" />
+                <p-button label="Cancelar" severity="secondary" (click)="isCadastrarVisivel = false" />
                 <p-button label="Salvar" type="submit" [disabled]="cargoForm.invalid"/>
             </div>
         </form>
     </p-dialog>
+
+
+    <p-dialog header="Atualizar Cargo" [modal]="true" [(visible)]="isAtualizarVisivel" [style]="{ width: '25rem' }">
+        <form #cargoForm2="ngForm" (ngSubmit)="atualizar(cargoAtualizado.id)">
+            <div class="field">
+                <p-floatlabel variant="on">
+                    <input 
+                        [style]="{'width': '100%'}"
+                        type="text" 
+                        pInputText 
+                        id="descricao2" 
+                        name="descricao2"
+                        [(ngModel)]="cargoAtualizado.descricao"
+                        #descricao2="ngModel"
+                        required
+                        maxLength="50"
+                        [ngClass]="{'ng-invalid ng-dirty': descricao2.invalid && descricao2.dirty}"
+                    />
+                    <label for="nome">Nome</label>
+                </p-floatlabel>
+                <small class="p-error block" *ngIf="descricao2.errors?.['required'] && descricao2.touched">
+                    Descrição é obrigatória
+                </small>
+            </div>
+            <div class="flex justify-end gap-2">
+                <p-button label="Cancelar" severity="secondary" (click)="isAtualizarVisivel = false" />
+                <p-button label="Salvar" type="submit" [disabled]="cargoForm2.invalid"/>
+            </div>
+        </form>
+    </p-dialog>
+    <p-toast position="bottom-right" />
+    <p-confirmpopup />
 </main>

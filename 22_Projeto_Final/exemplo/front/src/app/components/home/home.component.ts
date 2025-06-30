@@ -91,14 +91,10 @@ export class HomeComponent implements OnInit {
         .subscribe(() => {
           this.isAtualizando = false;
           this.router.navigate(['/']);
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Usuário atualizado com sucesso' });
         }
         );
 
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: 'Usuário atualizado com sucesso'
-      });
 
     } else {
       form.control.markAllAsTouched();

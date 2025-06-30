@@ -2,7 +2,7 @@
     <p-card>
         <div class="centered">
             <b class="p-card-title">Funcionários</b>
-            <p-button (onClick)="mostrarModal()" pTooltip="Adicionar funcionário" tooltipPosition="top" icon="pi pi-plus" size="small" />
+            <p-button (onClick)="mostrarModalCadastrar()" pTooltip="Adicionar funcionário" tooltipPosition="top" icon="pi pi-plus" size="small" />
         </div>
         <p-table [value]="funcionarios()" [scrollable]="true" scrollDirection="both" [scrollHeight]="'flex'">
             <ng-template #header>
@@ -22,8 +22,8 @@
                     <td>{{ funcionario.cargo.descricao }}</td>
                     <td>
                         <div class="centered">
-                            <p-button pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil" size="small" />
-                            <p-button pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" size="small" />
+                            <p-button (onClick)="mostrarModalAtualizar(funcionario.id)" pTooltip="Editar" tooltipPosition="top" icon="pi pi-pencil" size="small" />
+                            <p-button (onClick)="excluir(funcionario.id, $event)" pTooltip="Excluir" tooltipPosition="top" icon="pi pi-trash" size="small" />
                         </div>
                     </td>
                 </tr>
@@ -31,7 +31,7 @@
         </p-table>
     </p-card>
 
-    <p-dialog header="Adicionar Funcionário" [modal]="true" [(visible)]="isModalVisivel" [style]="{ width: '25rem' }">
+    <p-dialog header="Adicionar Funcionário" [modal]="true" [(visible)]="isCadastrarVisivel" [style]="{ width: '25rem' }">
         <form #funcForm="ngForm" (ngSubmit)="onSubmit()">
             <div class="field">
                 <p-floatlabel variant="on">
@@ -110,9 +110,96 @@
                 </small>
             </div>
             <div class="flex justify-end gap-2">
-                <p-button label="Cancelar" severity="secondary" (click)="isModalVisivel = false" />
+                <p-button label="Cancelar" severity="secondary" (click)="isCadastrarVisivel = false" />
                 <p-button label="Salvar" type="submit" [disabled]="funcForm.invalid"/>
             </div>
         </form>
     </p-dialog>
+
+    <p-dialog header="Atualizar Funcionário" [modal]="true" [(visible)]="isAtualizarVisivel" [style]="{ width: '25rem' }">
+        <form #funcForm2="ngForm" (ngSubmit)="atualizar(funcionarioAtualizado.id)">
+            <div class="field">
+                <p-floatlabel variant="on">
+                    <input 
+                        [style]="{'width': '100%'}"
+                        type="text" 
+                        pInputText 
+                        id="nome2" 
+                        name="nome2"
+                        [(ngModel)]="funcionarioAtualizado.nome"
+                        #nome2="ngModel"
+                        required
+                        maxLength="50"
+                        [ngClass]="{'ng-invalid ng-dirty': nome2.invalid && nome2.dirty}"
+                    />
+                    <label for="nome2">Nome</label>
+                </p-floatlabel>
+                <small class="p-error block" *ngIf="nome2.errors?.['required'] && nome2.touched">
+                    Nome é obrigatório
+                </small>
+            </div>
+            <div class="field">
+                <p-floatlabel variant="on">
+                    <p-datepicker
+                        dateFormat="dd/mm/yy"
+                        appendTo="body"
+                        [inputStyle]="{'width': '100%'}"
+                        [style]="{'width': '100%'}"
+                        id="dataNasc2" 
+                        name="dataNasc2"
+                        [(ngModel)]="funcionarioAtualizado.dataNascimento"
+                        #dataNasc2="ngModel"
+                        required
+                        inputId="on_label"
+                        showIcon
+                        iconDisplay="input"
+                        [ngClass]="{'ng-invalid ng-dirty': dataNasc2.invalid && dataNasc2.dirty}"
+                    />
+                    <label for="on_label">Data de Nascimento</label>
+                </p-floatlabel>
+                <small class="p-error block" *ngIf="dataNasc2.errors?.['required'] && dataNasc2.touched">
+                    Data de Nascimento é obrigatória
+                </small>
+            </div>
+            <div class="field">
+                <p-floatlabel variant="on">
+                    <p-select 
+                        appendTo="body"
+                        [style]="{'width': '100%'}"
+                        id="funcCargo2" 
+                        name="funcCargo2"
+                        #funcCargo2="ngModel"
+                        [options]="cargos()" 
+                        [(ngModel)]="funcionarioAtualizado.cargo" 
+                        optionLabel="descricao"
+                        [filter]="true"
+                        filterBy="descricao" 
+                        [showClear]="true"
+                        required
+                    >
+                        <ng-template #selecionado let-selecionado>
+                            <div>
+                                <div>{{ selecionado.descricao }}</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-cargo #cargo>
+                            <div>
+                                <div>{{ cargo.descricao }}</div>
+                            </div>
+                        </ng-template>
+                    </p-select>
+                    <label for="on_label">Cargo</label>
+                </p-floatlabel>
+                <small class="p-error block" *ngIf="funcCargo2.errors?.['required'] && funcCargo2.touched">
+                Cargo é obrigatório 
+                </small>
+            </div>
+            <div class="flex justify-end gap-2">
+                <p-button label="Cancelar" severity="secondary" (click)="isCadastrarVisivel = false" />
+                <p-button label="Salvar" type="submit" [disabled]="funcForm2.invalid"/>
+            </div>
+        </form>
+    </p-dialog>
+    <p-toast position="bottom-right" />
+    <p-confirmpopup />
 </main>

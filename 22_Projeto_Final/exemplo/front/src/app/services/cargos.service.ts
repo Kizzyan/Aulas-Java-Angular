@@ -14,7 +14,7 @@ export class CargosService {
   }
 
   buscar(id: number) {
-    return this.http.get<Array<Cargo>>(`${this.url}/${id}`);
+    return this.http.get<Cargo>(`${this.url}/${id}`);
   }
 
   salvar(cargo: Cargo) {
@@ -26,6 +26,6 @@ export class CargosService {
   }
 
   excluir(id: number) {
-    return this.http.delete<Cargo>(`${this.url}/excluir/${id}`);
+    return this.http.delete<null>(`${this.url}/excluir/${id}`);
   }
 }

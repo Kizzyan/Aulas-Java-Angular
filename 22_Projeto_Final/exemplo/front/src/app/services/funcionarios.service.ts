@@ -13,8 +13,8 @@ export class FuncionariosService {
     return this.http.get<Array<Funcionario>>(this.url);
   }
 
-  buscarPorId(id: number) {
-    return this.http.get<Array<Funcionario>>(`${this.url}/${id}`);
+  buscar(id: number) {
+    return this.http.get<Funcionario>(`${this.url}/${id}`);
   }
 
   salvar(funcionario: Funcionario) {
