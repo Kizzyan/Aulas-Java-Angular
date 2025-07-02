@@ -1,8 +1,8 @@
 package com.iwt.exemplo.services;
 
 import com.iwt.exemplo.dtos.LoginRequest;
-import com.iwt.exemplo.dtos.RegistroRequest;
-import com.iwt.exemplo.dtos.RegistroResponse;
+import com.iwt.exemplo.dtos.UsuarioRequest;
+import com.iwt.exemplo.dtos.UsuarioResponse;
 import com.iwt.exemplo.models.Usuario;
 import com.iwt.exemplo.repositories.RoleRepository;
 import com.iwt.exemplo.repositories.UsuarioRepository;
@@ -32,7 +32,7 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public RegistroResponse registrar(RegistroRequest dto) {
+    public UsuarioResponse registrar(UsuarioRequest dto) {
         Usuario usuario = Usuario.builder()
                 .email(dto.getEmail())
                 .nome(dto.getNome())
@@ -41,7 +41,7 @@ public class AuthService {
                 .ativo(true)
                 .build();
         usuario = usuarioRepository.save(usuario);
-        return RegistroResponse.builder()
+        return UsuarioResponse.builder()
                 .id(usuario.getId())
                 .email(usuario.getEmail())
                 .nome(usuario.getNome())

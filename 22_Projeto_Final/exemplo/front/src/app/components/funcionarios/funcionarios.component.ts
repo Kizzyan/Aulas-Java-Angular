@@ -74,7 +74,7 @@ export class FuncionariosComponent implements OnInit {
       });
   }
 
-    buscarPorId(id: number) {
+  buscarPorId(id: number) {
     this.funcionarioService.buscar(id)
       .pipe(
         catchError((err) => {
@@ -121,7 +121,7 @@ export class FuncionariosComponent implements OnInit {
     this.buscarPorId(id);
   }
 
-    excluir(id: number, event: Event) {
+  excluir(id: number, event: Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Deseja mesmo excluir esse funcionário?',
@@ -188,13 +188,9 @@ export class FuncionariosComponent implements OnInit {
       .subscribe(() => {
         this.isCadastrarVisivel = false;
         this.novoFuncionario = new Funcionario();
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Funcionário cadastrado com sucesso' });
         this.listarFuncionarios();
       });
 
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Funcionário cadastrado com sucesso'
-    });
   }
 }

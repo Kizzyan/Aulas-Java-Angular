@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "funcionarios")
@@ -26,8 +27,7 @@ public class Funcionario implements Serializable {
     private String nome;
 
     @Column(name = "data_nascimento")
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataNascimento;
+    private LocalDateTime dataNascimento;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cargo_id", nullable = false)

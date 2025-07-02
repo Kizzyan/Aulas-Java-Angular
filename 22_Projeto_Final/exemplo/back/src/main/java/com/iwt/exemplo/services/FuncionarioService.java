@@ -36,9 +36,6 @@ public class FuncionarioService {
         Funcionario funcionarioExistente = funcionarioRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Funcionario não encontrado para o ID: " + id));
 
-        System.out.println(funcionario.toString());
-        System.out.println(funcionarioExistente.toString());
-
         funcionarioExistente.setNome(funcionario.getNome());
         funcionarioExistente.setDataNascimento(funcionario.getDataNascimento());
         funcionarioExistente.setCargo(funcionario.getCargo());

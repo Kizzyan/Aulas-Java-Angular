@@ -3,12 +3,14 @@ package com.iwt.exemplo.controllers;
 import com.iwt.exemplo.models.Cargo;
 import com.iwt.exemplo.repositories.CargoRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@RequestMapping("/cargos")
 @SuppressWarnings("unused")
 public class CargoController {
     private final CargoRepository cargoRepository;
@@ -17,13 +19,13 @@ public class CargoController {
         this.cargoRepository = cargoRepository;
     }
 
-    @GetMapping("/cargos")
-    public ResponseEntity<List<Cargo>> listarCargos() {
+    @GetMapping
+    public ResponseEntity<List<Cargo>> listar() {
         List<Cargo> cargos = cargoRepository.findAll();
         return ResponseEntity.ok(cargos);
     }
 
-    @GetMapping("/cargos/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Cargo> achar(@PathVariable("id") Long id) {
         Cargo cargo = cargoRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Cargo não encontrado para id " + id)
@@ -31,13 +33,15 @@ public class CargoController {
         return ResponseEntity.ok(cargo);
     }
 
-    @PostMapping("/admin/cargos/registrar")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/registrar")
     public ResponseEntity<Cargo> registrar(@RequestBody Cargo cargo) {
         Cargo cargoCriado = cargoRepository.save(cargo);
         return ResponseEntity.ok(cargoCriado);
     }
 
-    @PutMapping("/admin/cargos/atualizar/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<Cargo> atualizar(@PathVariable("id") Long id, @RequestBody Cargo cargoAtualizado) {
         Cargo cargo = cargoRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Cargo não encontrado para id " + id)
@@ -47,7 +51,8 @@ public class CargoController {
         return ResponseEntity.ok(cargoAtualizado);
     }
 
-    @DeleteMapping("/admin/cargos/excluir/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/excluir/{id}")
     public ResponseEntity<?> excluir(@PathVariable("id") Long id) {
         Cargo cargo = cargoRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Cargo não encontrado para id " + id)

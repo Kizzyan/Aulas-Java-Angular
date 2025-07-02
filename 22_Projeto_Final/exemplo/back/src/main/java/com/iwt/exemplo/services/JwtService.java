@@ -1,10 +1,12 @@
 package com.iwt.exemplo.services;
 
+import com.iwt.exemplo.repositories.UsuarioRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,6 +20,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class JwtService {
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     @Value("${security.jwt.secret-key}")
     private String secretKey;
 
@@ -25,6 +31,7 @@ public class JwtService {
     private long jwtExpiration;
 
     private static final String AUTHORITIES_CLAIM = "authorities";
+    private static final String ID_CLAIM = "id";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -37,9 +44,12 @@ public class JwtService {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        Long usuarioId = usuarioRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado.")).getId();
         claims.put(AUTHORITIES_CLAIM, userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList()));
+        claims.put(ID_CLAIM, usuarioId);
         return generateToken(claims, userDetails);
     }
 

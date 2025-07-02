@@ -50,7 +50,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         );
         Usuario usuario = new Usuario();
         usuario.setNome("Admin");
-        usuario.setSenha(passwordEncoder.encode("12345"));
+        usuario.setSenha(passwordEncoder.encode("123456"));
         usuario.setEmail("admin@test.com");
         usuario.setRoles(Collections.singletonList(adminRole));
         usuario.setAtivo(true);

@@ -2,8 +2,8 @@ package com.iwt.exemplo.controllers;
 
 import com.iwt.exemplo.dtos.LoginResponse;
 import com.iwt.exemplo.dtos.LoginRequest;
-import com.iwt.exemplo.dtos.RegistroRequest;
-import com.iwt.exemplo.dtos.RegistroResponse;
+import com.iwt.exemplo.dtos.UsuarioRequest;
+import com.iwt.exemplo.dtos.UsuarioResponse;
 import com.iwt.exemplo.models.Usuario;
 import com.iwt.exemplo.services.AuthService;
 import com.iwt.exemplo.services.JwtService;
@@ -27,8 +27,8 @@ public class AuthController {
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity<RegistroResponse> registrar(@Valid @RequestBody RegistroRequest dto) {
-        RegistroResponse usuarioRegistrado = authService.registrar(dto);
+    public ResponseEntity<UsuarioResponse> registrar(@Valid @RequestBody UsuarioRequest dto) {
+        UsuarioResponse usuarioRegistrado = authService.registrar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRegistrado);
     }
 
